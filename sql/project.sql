@@ -46,7 +46,7 @@ ALTER TABLE room ADD CONSTRAINT pk_room PRIMARY KEY(roomNumber,buildingName);
 
 ALTER TABLE feature ADD CONSTRAINT pk_feature PRIMARY KEY(featureName);
 
-ALTER TABLE reservation ADD CONSTRAINT pk_reservation PRIMARY KEY(roomNumber, buildingName);
+ALTER TABLE reservation ADD CONSTRAINT pk_reservation PRIMARY KEY(roomNumber, buildingName, reservedFrom, reservedTo);
 
 ALTER TABLE roomfeature ADD CONSTRAINT pk_roomfeature PRIMARY KEY(roomNumber, buildingName, featureName);
 
