@@ -42,6 +42,28 @@ $.ajax({
 });
 
 function registerRoom() {
-    const buildingName = select.options[select.selectedIndex].value;
-    console.log(buildingName);
+
+    const buildingNamesSelect = document.getElementById("buildingNames");
+    const buildingName = buildingNamesSelect.options[buildingNamesSelect.selectedIndex].value;
+    const roomNumber = document.getElementById("roomNumber").value;
+    const features = $('#features').val();
+    const responsiblePerson = document.getElementById("responsiblePerson").value;
+
+    $.ajax({
+        url: "php/registerRoom.php",
+        context: document.body,
+        type: "post",
+        data: JSON.stringify({
+            buildingName: buildingName,
+            roomNumber: roomNumber,
+            features: features,
+            responsiblePerson: responsiblePerson
+        }),
+        contentType:
+            "application/json",
+        success:
+            function () {
+                alert("Успешно добавена стая!");
+            }
+    });
 }
