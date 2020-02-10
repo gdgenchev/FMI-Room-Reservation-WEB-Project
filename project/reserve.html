@@ -7,18 +7,14 @@
 </head>
 <body>
 <div id="container">
-    <form>
+    <form id="reservation-form">
         Резервиране от: <input type="text" id="startDateTime">
         Резервиране до: <input type="text" id="endDateTime">
-        На име: <input type="text" id="reservedBy">
-        Предмет: <input type="text" id="subject">
-        <input type="button" value="Добави" onclick="getAvailableRooms()">
+        <select id="available-rooms"></select>
+        <input type="button" value="Покажи свободни стаи" onclick="getAvailableRooms()">
     </form>
 </div>
 
-<div id="available-rooms-div">
-
-</div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/reserve/reserve.js"></script>
