@@ -42,25 +42,22 @@ $.ajax({
 });
 
 function registerRoom() {
-
-    const buildingNamesSelect = document.getElementById("buildingNames");
+    const buildingNamesSelect = document.getElementById("building-names");
     const buildingName = buildingNamesSelect.options[buildingNamesSelect.selectedIndex].value;
-    const roomNumber = document.getElementById("roomNumber").value;
+    const roomNumber = document.getElementById("room-number").value;
     const features = $('#features').val();
-    const responsiblePerson = document.getElementById("responsiblePerson").value;
+    const responsiblePerson = document.getElementById("responsible-person").value;
 
     $.ajax({
         url: "php/registerRoom.php",
         context: document.body,
         type: "post",
-        data: JSON.stringify({
+        data: {
             buildingName: buildingName,
             roomNumber: roomNumber,
             features: features,
             responsiblePerson: responsiblePerson
-        }),
-        contentType:
-            "application/json",
+        },
         success:
             function () {
                 alert("Успешно добавена стая!");
