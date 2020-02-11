@@ -38,68 +38,29 @@ function getAvailableRooms() {
     });
 }
 
-// function getRoomSchedule() {
-//     const roomNumber = document.getElementById('roomNumber').value;
-//     const buildingName = document.getElementById('buildingName').value;
-//     $.ajax({
-//         url: "php/getRoomSchedule.php",
-//         context: document.body,
-//         type: "get",
-//         data: {
-//             roomNumber: roomNumber,
-//             buildingName: buildingName
-//         },
-//         success: function (response) {
-//             const scheduleDiv = document.getElementById('schedule-div');
-//             //scheduleDiv.innerHTML = '<select id=\"schedule-select\"></select>';
-//             // var select = document.getElementById("schedule-select");
-//             let places = JSON.parse(response);
-//             // select.setAttribute("size", places.length);
-//             // for (let i = 0; i < places.length; i++) {
-//             //     var option = new Option();
-//             //     option.innerHTML = places[i]["roomNumber"] + "  " + places[i]["buildingName"] + places[i]["reservedFrom"]
-//             //         + places[i]["reservedTo"] + places[i]["personWhoReserved"] + places[i]["subject"];
-//             //     option.setAttribute("value", places[i]["roomNumber"]);
-//             //     select.options[select.options.length] = option;
-//             //}
-//
-// /*
-//             var table = document.createElement('table');
-//             table.setAttribute('border','1');
-//             table.setAttribute('width','100%');
-//             table.setAttribute('border-collapse', 'collapse');
-//
-//             var HTML = "<table border=1 width=100%><tr>";
-//             HTML += "<br><br>";
-//             HTML += "<table style= \"border:1px solid black; border-collapse: collapse; width: 100%; text-align: center;\" id=\"tableWithData\">";
-//             HTML += "<tr>";
-//             HTML += "<th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">Room</th>";
-//             HTML += "<th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">Building</th>";
-//             HTML += "<th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">From</th>";
-//             HTML += "<th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">To</th>";
-//             HTML += "<th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">Person</th>";
-//             HTML += "<th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">Subject</th>";
-//             HTML += "</tr>";
-//             for (let i = 0; i < places.length; i++) {
-//                 document.getElementById('roomNumber') = places[i]['roomNumber'];
-//                 HTML += "<tr style=\"border:1px solid black\">";
-//                 HTML += "<td id = \"roomNumber\" style=\"border:1px solid black\">  </td>";
-//                 HTML += "<td id = \"buildingName\" style=\"border:1px solid black\">  </td>";
-//                 HTML += "<td id = \"reservedFrom\" style=\"border:1px solid black\">  </td>";
-//                 HTML += "<td id = \"reservedTo\"style=\"border:1px solid black\">  </td>";
-//                 HTML += "<td id = \"personWhoReserved\"style=\"border:1px solid black\">  </td>";
-//                 HTML +="<td id = \"subject\" style=\"border:1px solid black\">   </td>";
-//                 HTML += "</tr>";
-//             }
-//             HTML += "</table>";
-//             scheduleDiv.innerHTML = HTML;
-//
-//         }
-//     });
-//
-//  */
-// }
 
+function removeReservation() {
+    const roomNumber = document.getElementById('roomNumber').value;
+    const buildingName = document.getElementById('buildingName').value;
+    const reservedFrom = document.getElementById('reservedFrom').value;
+    const reservedTo = document.getElementById('reservedTo').value;
+
+    $.ajax({
+        url: "php/getReservationForRemoval.php",
+        context: document.body,
+        type: "get",
+        data: {
+            roomNumber: roomNumber,
+            buildingName: buildingName,
+            reservedFrom: reservedFrom,
+            reservedTo: reservedTo,
+        },
+        success: function (response) {
+            const reservationForm = $('#removal-form');
+            reservationForm.append('<p> Резервацията е премахната.</p>');
+        }
+    });
+}
 
 $("#features-select").mousedown(function (e) {
     e.preventDefault();
