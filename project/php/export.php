@@ -7,12 +7,12 @@
 	header('Pragma: no-cache');
 	header('Expires: 0');
 
-	$delimeter = ",";
+	$delimiter = ",";
 	$output = fopen("../downloadedContent.csv","w");
 
 	fputs($output, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
 
-	fputcsv($output, array("Номер на стая","Сграда","От","До","Лектор","Предмет"),$delimeter);
+	fputcsv($output, array("Номер на стая","Сграда","От","До","Лектор","Предмет"),$delimiter);
 	$query = "select roomNumber, buildingName, reservedFrom, reservedTo, personWhoReserved, subject  from reservation order by buildingName, roomNumber ";
 	$result = mysqli_query($conn,$query);
 	
@@ -22,7 +22,7 @@
 		$lineWithConvertedDate = array($line['roomNumber'],$line['buildingName'],
 			$line['reservedFrom'], $line['reservedTo'], $line['personWhoReserved'],$line['subject']);
 		
-		fputcsv($output,$lineWithConvertedDate,$delimeter);
+		fputcsv($output,$lineWithConvertedDate,$delimiter);
 	}
 
 	fclose($output);
