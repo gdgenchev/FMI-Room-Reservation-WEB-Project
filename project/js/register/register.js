@@ -4,7 +4,7 @@ $.ajax({
     url: "php/getBuildings.php",
     context: document.body,
     success: function (response) {
-        var buildingsSelect = document.getElementById("buildingNames");
+        var buildingsSelect = document.getElementById("building-names");
         let buildingsNames = JSON.parse(response);
         for (let i = 0; i < buildingsNames.length; i++) {
             buildingsSelect.options[buildingsSelect.options.length] = new Option(buildingsNames[i]);
@@ -31,7 +31,7 @@ $.ajax({
     success: function (response) {
         var featuresSelect = document.getElementById("features");
         let features = JSON.parse(response);
-        featuresSelect.setAttribute("size", features.length)
+        featuresSelect.setAttribute("size", features.length);
         for (let i = 0; i < features.length; i++) {
             var option = new Option();
             option.innerHTML = features[i]["iconCode"] + " " + features[i]["featureName"];
@@ -49,17 +49,18 @@ function registerRoom() {
     const responsiblePerson = document.getElementById("responsible-person").value;
 
     $.ajax({
-        url: "php/registerRoom.php",
-        context: document.body,
-        type: "post",
-        data: {
-            buildingName: buildingName,
-            roomNumber: roomNumber,
-            features: features,
-            responsiblePerson: responsiblePerson
-        },
-        success:
-            function () {
+            url: "php/registerRoom.php",
+            context: document.body,
+            type: "post",
+            data: {
+                room: JSON.stringify({
+                    buildingName: buildingName,
+                    roomNumber: roomNumber,
+                    features: features,
+                    responsiblePerson: responsiblePerson
+                })
+            },
+        success: function () {
                 alert("Успешно добавена стая!");
             }
     });
