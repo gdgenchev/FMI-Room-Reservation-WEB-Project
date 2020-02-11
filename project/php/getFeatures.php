@@ -1,7 +1,10 @@
 <?php
-require_once "persistence/resource/FeatureRepository.php";
-require_once "persistence/resource/FeatureRepositorySQL.php";
+require_once "persistence/feature/FeatureRepository.php";
+require_once "persistence/feature/FeatureRepositorySQL.php";
+require_once "util/DbConnectionCreator.php";
 
-$featureRepository = new FeatureRepositorySQL();
+$conn = DbConnectionCreator::createConnection();
+
+$featureRepository = new FeatureRepositorySQL($conn);
 $features = $featureRepository->getResources();
 echo (json_encode($features));

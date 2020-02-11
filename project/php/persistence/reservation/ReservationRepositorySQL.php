@@ -5,9 +5,9 @@ class ReservationRepositorySQL implements ReservationRepository
 {
     private $conn;
 
-    function __construct()
+    function __construct($conn)
     {
-        $this->conn = DbConnectionCreator::createConnection();
+        $this->conn = $conn;
     }
 
     function getAvailableRooms($startDateTime, $endDateTime)

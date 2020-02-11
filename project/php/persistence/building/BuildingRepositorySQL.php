@@ -1,13 +1,11 @@
 <?php
-require_once "util/DbConnectionCreator.php";
-
 class BuildingRepositorySQL implements BuildingRepository
 {
     private $conn;
 
-    function __construct()
+    function __construct($conn)
     {
-        $this->conn = DbConnectionCreator::createConnection();
+        $this->conn = $conn;
     }
 
 
