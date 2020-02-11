@@ -9,7 +9,10 @@ class DbConnectionCreator
         $username = $ini['db_user'];
         $password = $ini['db_password'];
 
-        return new PDO($connectionString, $username, $password);
+        $conn = new PDO($connectionString, $username, $password);
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+        return $conn;
     }
 }
 
