@@ -1,12 +1,13 @@
 <?php
+require_once "util/DbConnectionCreator.php";
 
 class ReservationRepositorySQL implements ReservationRepository
 {
     private $conn;
 
-    function __construct($conn)
+    function __construct()
     {
-        $this->conn = $conn;
+        $this->conn = DbConnectionCreator::createConnection();
     }
 
     function getAvailableRooms($startDateTime, $endDateTime)

@@ -1,13 +1,13 @@
 <?php
-
+require_once "util/DbConnectionCreator.php";
 
 class FeatureRepositorySQL implements FeatureRepository
 {
     private $conn;
 
-    function __construct($conn)
+    function __construct()
     {
-        $this->conn = $conn;
+        $this->conn = DbConnectionCreator::createConnection();
     }
 
 
