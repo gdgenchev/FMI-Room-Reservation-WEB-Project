@@ -26,7 +26,7 @@ class RoomRepositorySQL implements RoomRepository
         try {
             $this->conn->prepare($sql)->execute([$buildingName, $roomNumber, $type, $seats, $responsiblePerson]);
         } catch (PDOException $e) {
-            if ($e->getCode() == 1062) {
+            if ($e->getCode() == 23000) {
                 return false;
             } else {
                 throw $e;
