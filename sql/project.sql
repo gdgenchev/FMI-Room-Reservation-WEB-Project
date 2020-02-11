@@ -12,8 +12,8 @@ longitude DOUBLE
 );
 
 CREATE TABLE room(
-roomNumber VARCHAR(10),
 buildingName VARCHAR(100),
+roomNumber VARCHAR(10),
 type VARCHAR(50),
 seats INTEGER,
 responsiblePerson VARCHAR(100)
