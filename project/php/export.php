@@ -7,7 +7,7 @@
 	header('Pragma: no-cache');
 	header('Expires: 0');
 
-	$delimeter = ";";
+	$delimeter = ",";
 	$output = fopen("../downloadedContent.csv","w");
 
 	fputs($output, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
