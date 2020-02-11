@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div id="container">
+    <form id="removal-form">
+        Стая: <input type="text" id="roomNumber">
+        Сграда: <input type="text" id="buildingName">
+        Резервация от: <input type="text" id="reservedFrom">
+        Резервация до: <input type="text" id="reservedTo">
+        <input type="button" value="Отмени резервацията" onclick="removeReservation()">
+    </form>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/reserve/reserve.js"></script>
+</body>
+</html>
