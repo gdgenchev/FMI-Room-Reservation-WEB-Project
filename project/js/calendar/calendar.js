@@ -11,7 +11,7 @@ $( document ).ready(function()
 				{
 			  		obj[i.toString()] = info[i];
 			  	}
-			    $("#mytable").load("./project/php/getInfo.php", obj);
+			    $("#mytable").load("php/getInfo.php", obj);
 			     return false;
 		  });
 	  });
