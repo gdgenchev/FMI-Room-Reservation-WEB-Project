@@ -25,8 +25,8 @@ iconCode CHAR(8)
 );
 
 CREATE TABLE reservation(
-roomNumber VARCHAR(10),
 buildingName VARCHAR(100),
+roomNumber VARCHAR(10),
 reservedFrom DATETIME,
 reservedTo DATETIME,
 personWhoReserved VARCHAR(50),
@@ -34,21 +34,21 @@ subject VARCHAR(100)
 );
 
 CREATE TABLE roomfeature(
-roomNumber VARCHAR(10),
 buildingName VARCHAR(100),
+roomNumber VARCHAR(10),
 featureName VARCHAR(30)
 );
 
 ----- Constraints -----
 ALTER TABLE building ADD CONSTRAINT pk_building PRIMARY KEY(buildingName);
 
-ALTER TABLE room ADD CONSTRAINT pk_room PRIMARY KEY(roomNumber,buildingName);
+ALTER TABLE room ADD CONSTRAINT pk_room PRIMARY KEY(buildingName, roomNumber);
 
 ALTER TABLE feature ADD CONSTRAINT pk_feature PRIMARY KEY(featureName);
 
-ALTER TABLE reservation ADD CONSTRAINT pk_reservation PRIMARY KEY(roomNumber, buildingName, reservedFrom, reservedTo);
+ALTER TABLE reservation ADD CONSTRAINT pk_reservation PRIMARY KEY(buildingName, roomNumber, reservedFrom, reservedTo);
 
-ALTER TABLE roomfeature ADD CONSTRAINT pk_roomfeature PRIMARY KEY(roomNumber, buildingName, featureName);
+ALTER TABLE roomfeature ADD CONSTRAINT pk_roomfeature PRIMARY KEY(buildingName, roomNumber, featureName);
 
 ----- Building Data ----
 INSERT INTO building 
@@ -68,13 +68,13 @@ INSERT INTO feature
 	VALUES('Проектор', '&#xf03d;');
     
 INSERT INTO feature 
-	VALUES('Компютър', '&#xf108;');    
+	VALUES('Компютър', '&#xf108;');
 
 INSERT INTO room
-    VALUES('Семинарна зала', '210', 'ФХФ', 200, 'Милен Петров');
+    VALUES('ФХФ', '210', 'Семинарна зала', 200, 'Милен Петров');
 
 INSERT INTO room
-    VALUES('Семинарна зала', '325', 'ФМИ', 100, 'Тинко Тинчев');
+    VALUES('ФМИ', '325', 'Семинарна зала', 100, 'Тинко Тинчев');
 
 INSERT INTO reservation
-	VALUES('200','ФМИ','2020-01-01 10:10:10','2020-01-01 11:10:10','Милен Петров','Web');
+	VALUES('ФМИ', '200', '2020-01-01 10:10:10','2020-01-01 11:10:10','Милен Петров','Web');
