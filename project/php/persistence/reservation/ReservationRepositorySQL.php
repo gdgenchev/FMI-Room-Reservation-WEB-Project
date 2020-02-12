@@ -1,5 +1,7 @@
 <?php
 require_once "util/DbConnectionCreator.php";
+require_once "persistence/feature/FeatureRepository.php";
+require_once "persistence/feature/FeatureRepositorySQL.php";
 
 class ReservationRepositorySQL implements ReservationRepository
 {
@@ -41,8 +43,10 @@ class ReservationRepositorySQL implements ReservationRepository
         $sql  = "DELETE from reservation WHERE '$roomNumber' = roomNumber AND '$buildingName' = buildingName
                 AND STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') = reservedFrom
                 AND STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') = reservedTo";
-
-        return $this->conn->query($sql)->execute();
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['roomNumber' => $roomNumber, 'buildingName' => $buildingName, 'reservedFrom' => $reservedFrom, 'reservedTo' => $reservedTo]);
+        $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rooms;
     }
 
     function addReservation($reservation)
