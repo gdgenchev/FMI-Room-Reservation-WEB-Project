@@ -1,5 +1,7 @@
 <?php
 require_once "util/DbConnectionCreator.php";
+require_once "persistence/feature/FeatureRepository.php";
+require_once "persistence/feature/FeatureRepositorySQL.php";
 
 class ReservationRepositorySQL implements ReservationRepository
 {
@@ -20,10 +22,18 @@ class ReservationRepositorySQL implements ReservationRepository
                ON room.roomNumber = reservedRoom.roomNumber
                AND room.buildingName = reservedRoom.buildingName
                WHERE reservedFrom is NULL";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['startDateTime' => $startDateTime, 'endDateTime' => $endDateTime]);
+        $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-       return $this->conn->prepare($sql)
-           ->execute(['startDateTime' => $startDateTime, 'endDateTime' => $endDateTime])
-           ->fetchAll(PDO::FETCH_ASSOC);
+        $featureRepository = new FeatureRepositorySQL($this->conn);
+        foreach ($rooms as &$room) {
+            $buildingName = $room["buildingName"];
+            $roomNumber = $room["roomNumber"];
+            $room["features"] = $featureRepository->getResourceIconsForRoom($buildingName, $roomNumber);
+        }
+
+        return $rooms;
     }
 }
 
