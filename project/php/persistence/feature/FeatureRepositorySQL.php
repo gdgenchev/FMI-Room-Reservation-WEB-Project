@@ -24,11 +24,18 @@ class FeatureRepositorySQL implements FeatureRepository
 
         $sql = "INSERT INTO roomfeature(buildingName, roomNumber, featureName) VALUES (?, ?, ?)";
 
-        foreach ($features as &$feature)
-        {
+        foreach ($features as &$feature) {
             $this->conn->prepare($sql)->execute([$buildingName, $roomNumber, $feature]);
         }
 
         $this->conn->commit();
+    }
+
+    function getResourceIconsForRoom($buildingName, $roomNumber)
+    {
+        $sql = "SELECT iconCode FROM feature JOIN roomfeature ON feature.featureName = roomfeature.featureName
+                WHERE buildingName = '$buildingName' AND roomNumber = '$roomNumber'";
+
+        return $this->conn->query($sql)->fetchAll(PDO::FETCH_COLUMN);
     }
 }
