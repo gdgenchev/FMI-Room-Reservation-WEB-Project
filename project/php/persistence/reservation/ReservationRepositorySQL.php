@@ -2,6 +2,9 @@
 require_once "util/DbConnectionCreator.php";
 require_once "persistence/feature/FeatureRepository.php";
 require_once "persistence/feature/FeatureRepositorySQL.php";
+require_once "persistence/message/MessageRepository.php";
+require_once "persistence/message/MessageRepositorySQL.php";
+
 
 class ReservationRepositorySQL implements ReservationRepository
 {
@@ -25,10 +28,12 @@ class ReservationRepositorySQL implements ReservationRepository
         $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $featureRepository = new FeatureRepositorySQL($this->conn);
+        $messageRepository = new MessageRepositorySQL($this->conn);
         foreach ($rooms as &$room) {
             $buildingName = $room["buildingName"];
             $roomNumber = $room["roomNumber"];
             $room["features"] = $featureRepository->getResourceIconsForRoom($buildingName, $roomNumber);
+            $room["message"] = $messageRepository->getMessagesForRoom($buildingName,$roomNumber);
         }
 
         return $rooms;
