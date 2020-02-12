@@ -21,8 +21,9 @@ function getAvailableRooms() {
             availableRoomsSelect.attr("size", availableRooms.length);
             for (let i = 0; i < availableRooms.length; i++) {
                 var option = new Option();
-                option.innerHTML = availableRooms[i]["type"] + " " + availableRooms[i]["roomNumber"] + "  " + availableRooms[i]["buildingName"];
-                option.setAttribute("value", availableRooms[i]['buildingName'] + "," + availableRooms[i]["roomNumber"]);
+                option.innerHTML = availableRooms[i]["type"] + " " + availableRooms[i]["roomNumber"] + "  "
+                    + availableRooms[i]["buildingName"] + " " + availableRooms[i]["features"] + " " + availableRooms[i]["message"];
+                option.setAttribute("value", availableRooms[i]['buildingName'] + "," + availableRooms[i]["roomNumber"] );
                 availableRoomsSelect.append(option);
             }
             if (availableRooms.length === 0) {
