@@ -5,10 +5,10 @@ require_once "util/DbConnectionCreator.php";
 
 $conn = DbConnectionCreator::createConnection();
 
-$startDateTime = $_GET['startDateTime'];
-$endDateTime = $_GET['endDateTime'];
+$reservedFrom = $_POST['reservedFrom'];
+$reservedTo = $_POST['reservedTo'];
 
 $reservationRepository = new ReservationRepositorySQL($conn);
-$availableRooms= $reservationRepository->getAvailableRooms($startDateTime,$endDateTime);
+$availableRooms= $reservationRepository->getAvailableRooms($reservedFrom,$reservedTo);
 echo (json_encode($availableRooms));
 
