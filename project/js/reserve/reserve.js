@@ -4,8 +4,7 @@ const ROOT_DIR = "FMI-Room-Reservation-WEB-Project/project";
 function getAvailableRooms() {
     const reservedFrom = document.getElementById('reservedFrom').value;
     const reservedTo = document.getElementById('reservedTo').value;
-    // const reservedBy = document.getElementById('reservedBy').value;
-    // const subject = document.getElementById('subject').value;
+
     $.ajax({
         url: "php/getAvailableRooms.php",
         context: document.body,
@@ -30,15 +29,19 @@ function getAvailableRooms() {
                 alert("Няма свободни стаи за избраното време.");
                 return;
             }
+
+            $('.dynamic').remove();
+            $('#personWhoReserved').remove();
+            $('#subject').remove();
+            $('#subject').remove();
+
             const reservationForm = $('#reservation-form');
-            reservationForm.append('<br><br>');
-            reservationForm.append('На име: <input type="text" id="personWhoReserved">');
-            reservationForm.append('Предмет: <input type="text" id="subject">');
-            reservationForm.append('<input type="button" value="Добави" onclick="reserveRoom()">')
+            reservationForm.append('<label class="dynamic">На име:</label> <input type="text" id="personWhoReserved">');
+            reservationForm.append('<label class="dynamic">Предмет:</label> <input type="text" id="subject">');
+            reservationForm.append('<input class="dynamic" type="button" value="Добави" onclick="reserveRoom()">')
         }
     });
 }
-
 
 function removeReservation() {
     const roomNumber = document.getElementById('roomNumber').value;
@@ -85,7 +88,7 @@ function reserveRoom() {
                 buildingName: buildingName,
                 roomNumber: roomNumber,
                 personWhoReserved: personWhoReserved,
-                subject:subject
+                subject: subject
             })
         },
         success: function () {
@@ -98,10 +101,6 @@ function reserveRoom() {
         }
     });
 }
-
-
-
-
 
 $("#features-select").mousedown(function (e) {
     e.preventDefault();
