@@ -49,7 +49,11 @@ input[type=button]:hover {
 #features option {
     font-family: 'FontAwesome', sans-serif;
     font-size: 16px;
+}
 
+#available-rooms option {
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 16px;
 }
 
 h1 {
