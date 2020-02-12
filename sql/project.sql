@@ -79,6 +79,9 @@ INSERT INTO feature
 	VALUES('Компютър', '&#xf108;');
 
 INSERT INTO room
+    VALUES('ФМИ', '200', 'Семинарна зала', 150, 'Трифон Трифонов');
+
+INSERT INTO room
     VALUES('ФХФ', '210', 'Семинарна зала', 200, 'Милен Петров');
 
 INSERT INTO room
@@ -87,7 +90,13 @@ INSERT INTO room
 INSERT INTO reservation
 	VALUES('ФМИ', '200', '2020-01-01 10:10:10','2020-01-01 11:10:10','Милен Петров','Уеб');
 
+INSERT INTO reservation
+	VALUES('ФМИ', '325', '2020-01-01 10:10:10','2020-01-01 11:10:10','Тинко Тинчев','ЛП');
+
 INSERT INTO message
-    VALUES('ФМИ', '200', 'В ремонт');
+    VALUES('ФМИ', '200', 'Залата е в ремонт');
+
+INSERT INTO message
+    VALUES('ФМИ', '325', 'В залата няма ток');
 
 
