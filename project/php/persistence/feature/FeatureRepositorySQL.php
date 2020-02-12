@@ -34,8 +34,10 @@ class FeatureRepositorySQL implements FeatureRepository
     function getResourceIconsForRoom($buildingName, $roomNumber)
     {
         $sql = "SELECT iconCode FROM feature JOIN roomfeature ON feature.featureName = roomfeature.featureName
-                WHERE buildingName = ? AND roomNumber = ?";
+                WHERE buildingName = :buildingName AND roomNumber = :roomNumber";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(["buildingName" => $buildingName, "roomNumber" => $roomNumber]);
 
-        return $this->conn->prepare($sql)->execute([$buildingName, $roomNumber])->fetchAll(PDO::FETCH_COLUMN);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 }
