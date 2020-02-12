@@ -40,7 +40,7 @@ class ReservationRepositorySQL implements ReservationRepository
 
     function removeReservation($roomNumber, $buildingName, $reservedFrom, $reservedTo)
     {
-        $sql  = "DELETE from reservation WHERE '$roomNumber' = roomNumber AND '$buildingName' = buildingName
+        $sql  = "DELETE from reservation WHERE :roomNumber = roomNumber AND :buildingName = buildingName
                 AND STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') = reservedFrom
                 AND STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') = reservedTo";
         $stmt = $this->conn->prepare($sql);
