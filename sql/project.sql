@@ -50,13 +50,23 @@ ALTER TABLE building ADD CONSTRAINT pk_building PRIMARY KEY(buildingName);
 
 ALTER TABLE room ADD CONSTRAINT pk_room PRIMARY KEY(buildingName, roomNumber);
 
-ALTER TABLE feature ADD CONSTRAINT pk_feature PRIMARY KEY(featureName);
-
 ALTER TABLE reservation ADD CONSTRAINT pk_reservation PRIMARY KEY(buildingName, roomNumber, reservedFrom, reservedTo);
 
-ALTER TABLE roomfeature ADD CONSTRAINT pk_roomfeature PRIMARY KEY(buildingName, roomNumber, featureName);
+ALTER TABLE feature ADD CONSTRAINT pk_feature PRIMARY KEY(featureName);
+
+ALTER TABLE roomfeature ADD CONSTRAINT pk_roomfeature PRIMARY KEY (buildingName, roomNumber, featureName);
 
 ALTER TABLE message ADD CONSTRAINT pk_message PRIMARY KEY(buildingName, roomNumber, message);
+
+ALTER TABLE room ADD CONSTRAINT fk_room_building FOREIGN KEY(buildingName) REFERENCES building(buildingName);
+
+ALTER TABLE reservation ADD CONSTRAINT fk_reservation_room FOREIGN KEY(buildingName, roomNumber) REFERENCES room(buildingName, roomNumber);
+
+ALTER TABLE roomfeature ADD CONSTRAINT fk_roomfeature_feature FOREIGN KEY(featureName) REFERENCES feature(featureName);
+
+ALTER TABLE roomfeature ADD CONSTRAINT fk_roomfeature_room FOREIGN KEY(buildingName, roomNumber) REFERENCES room(buildingName, roomNumber);
+
+ALTER TABLE message ADD CONSTRAINT fk_message_room FOREIGN KEY(buildingName, roomNumber) REFERENCES room(buildingName, roomNumber);
 
 ----- Building Data ----
 INSERT INTO building 
@@ -98,5 +108,3 @@ INSERT INTO message
 
 INSERT INTO message
     VALUES('ФМИ', '325', 'В залата няма ток');
-
-
