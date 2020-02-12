@@ -2,17 +2,17 @@ const ROOT_DIR = "FMI-Room-Reservation-WEB-Project/project";
 
 
 function getAvailableRooms() {
-    const startDateTime = document.getElementById('startDateTime').value;
-    const endDateTime = document.getElementById('endDateTime').value;
+    const reservedFrom = document.getElementById('reservedFrom').value;
+    const reservedTo = document.getElementById('reservedTo').value;
     // const reservedBy = document.getElementById('reservedBy').value;
     // const subject = document.getElementById('subject').value;
     $.ajax({
         url: "php/getAvailableRooms.php",
         context: document.body,
-        type: "get",
+        type: "post",
         data: {
-            startDateTime: startDateTime,
-            endDateTime: endDateTime,
+            reservedFrom: reservedFrom,
+            reservedTo: reservedTo,
         },
         success: function (response) {
             //const availableRoomsSelect = document.getElementById('available-rooms');
@@ -23,7 +23,7 @@ function getAvailableRooms() {
             for (let i = 0; i < availableRooms.length; i++) {
                 var option = new Option();
                 option.innerHTML = availableRooms[i]["type"] + " " + availableRooms[i]["roomNumber"] + "  " + availableRooms[i]["buildingName"];
-                option.setAttribute("value", availableRooms[i]["roomNumber"]);
+                option.setAttribute("value", availableRooms[i]['buildingName'] + "," + availableRooms[i]["roomNumber"]);
                 availableRoomsSelect.append(option);
             }
             if (availableRooms.length === 0) {
@@ -32,8 +32,9 @@ function getAvailableRooms() {
             }
             const reservationForm = $('#reservation-form');
             reservationForm.append('<br><br>');
-            reservationForm.append('На име: <input type="text" id="reservedBy">');
+            reservationForm.append('На име: <input type="text" id="personWhoReserved">');
             reservationForm.append('Предмет: <input type="text" id="subject">');
+            reservationForm.append('<input type="button" value="Добави" onclick="reserveRoom()">')
         }
     });
 }
@@ -48,7 +49,7 @@ function removeReservation() {
     $.ajax({
         url: "php/getReservationForRemoval.php",
         context: document.body,
-        type: "get",
+        type: "post",
         data: {
             roomNumber: roomNumber,
             buildingName: buildingName,
@@ -61,6 +62,46 @@ function removeReservation() {
         }
     });
 }
+
+function reserveRoom() {
+    const reservedFrom = document.getElementById("reservedFrom").value;
+    const reservedTo = document.getElementById("reservedTo").value;
+    const availableRoomsSelect = document.getElementById("available-rooms");
+    const availableRoom = availableRoomsSelect.options[availableRoomsSelect.selectedIndex].value;
+    const personWhoReserved = document.getElementById("personWhoReserved").value;
+    const subject = document.getElementById("subject").value;
+    const array = availableRoom.split(",");
+    const buildingName = array[0];
+    const roomNumber = array[1];
+
+    $.ajax({
+        url: "php/reserveRoom.php",
+        context: document.body,
+        type: "post",
+        data: {
+            reservation: JSON.stringify({
+                reservedFrom: reservedFrom,
+                reservedTo: reservedTo,
+                buildingName: buildingName,
+                roomNumber: roomNumber,
+                personWhoReserved: personWhoReserved,
+                subject:subject
+            })
+        },
+        success: function () {
+            alert("Успешно добавена резервация!");
+        },
+        statusCode: {
+            409: function () {
+                alert('Грешка! Резервацията вече съществува.');
+            }
+        }
+    });
+}
+
+
+
+
 
 $("#features-select").mousedown(function (e) {
     e.preventDefault();
