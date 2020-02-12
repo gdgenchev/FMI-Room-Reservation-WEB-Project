@@ -39,6 +39,12 @@ roomNumber VARCHAR(10),
 featureName VARCHAR(30)
 );
 
+CREATE TABLE message(
+buildingName VARCHAR(100),
+roomNumber VARCHAR(10),
+message VARCHAR(100)
+);
+
 ----- Constraints -----
 ALTER TABLE building ADD CONSTRAINT pk_building PRIMARY KEY(buildingName);
 
@@ -49,6 +55,8 @@ ALTER TABLE feature ADD CONSTRAINT pk_feature PRIMARY KEY(featureName);
 ALTER TABLE reservation ADD CONSTRAINT pk_reservation PRIMARY KEY(buildingName, roomNumber, reservedFrom, reservedTo);
 
 ALTER TABLE roomfeature ADD CONSTRAINT pk_roomfeature PRIMARY KEY(buildingName, roomNumber, featureName);
+
+ALTER TABLE message ADD CONSTRAINT pk_message PRIMARY KEY(buildingName, roomNumber, message);
 
 ----- Building Data ----
 INSERT INTO building 
@@ -77,4 +85,9 @@ INSERT INTO room
     VALUES('ФМИ', '325', 'Семинарна зала', 100, 'Тинко Тинчев');
 
 INSERT INTO reservation
-	VALUES('ФМИ', '200', '2020-01-01 10:10:10','2020-01-01 11:10:10','Милен Петров','Web');
+	VALUES('ФМИ', '200', '2020-01-01 10:10:10','2020-01-01 11:10:10','Милен Петров','Уеб');
+
+INSERT INTO message
+    VALUES('ФМИ', '200', 'В ремонт');
+
+
