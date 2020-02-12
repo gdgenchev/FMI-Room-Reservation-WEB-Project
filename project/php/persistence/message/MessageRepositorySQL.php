@@ -30,4 +30,14 @@ class MessageRepositorySQL implements MessageRepository
 
         return true;
     }
+
+    function getMessagesForRoom($buildingName, $roomNumber)
+    {
+        $sql = "SELECT message FROM message 
+                WHERE buildingName = :buildingName AND roomNumber = :roomNumber";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(["buildingName" => $buildingName, "roomNumber" => $roomNumber]);
+
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 }
