@@ -15,13 +15,11 @@ class ReservationRepositorySQL implements ReservationRepository
     function getAvailableRooms($reservedFrom, $reservedTo)
     {
         $sql = "SELECT room.type, room.roomNumber, room.buildingName from room left join (select * from reservation where
-              STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') > reservedFrom AND 
-              STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') < reservedTo OR
-              STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') > reservedFrom AND
-              STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') < reservedTo) reservedRoom
-               ON room.roomNumber = reservedRoom.roomNumber
-               AND room.buildingName = reservedRoom.buildingName
-               WHERE reservedFrom is NULL";
+                STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') <= reservedTo AND 
+                STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') >= reservedFrom) reservedRoom
+                ON room.roomNumber = reservedRoom.roomNumber
+                AND room.buildingName = reservedRoom.buildingName
+                WHERE reservedFrom is NULL";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['reservedFrom' => $reservedFrom, 'reservedTo' => $reservedTo]);
         $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +38,7 @@ class ReservationRepositorySQL implements ReservationRepository
 
     function removeReservation($roomNumber, $buildingName, $reservedFrom, $reservedTo)
     {
-        $sql  = "DELETE from reservation WHERE :roomNumber = roomNumber AND :buildingName = buildingName
+        $sql = "DELETE from reservation WHERE :roomNumber = roomNumber AND :buildingName = buildingName
                 AND STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') = reservedFrom
                 AND STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') = reservedTo";
         $stmt = $this->conn->prepare($sql);
@@ -61,7 +59,7 @@ class ReservationRepositorySQL implements ReservationRepository
         $sql = "INSERT INTO reservation(buildingName, roomNumber, reservedFrom, reservedTo, personWhoReserved, subject) VALUES (?, ?, ?, ?, ?,?)";
 
         try {
-            $this->conn->prepare($sql)->execute([$buildingName,$roomNumber, $reservedFrom, $reservedTo, $personWhoReserved, $subject]);
+            $this->conn->prepare($sql)->execute([$buildingName, $roomNumber, $reservedFrom, $reservedTo, $personWhoReserved, $subject]);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
                 return false;
