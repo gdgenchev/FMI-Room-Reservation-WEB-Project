@@ -13,23 +13,34 @@ class ReservationRepositorySQL implements ReservationRepository
     function getAvailableRooms($reservedFrom, $reservedTo)
     {
         $sql = "SELECT room.type, room.roomNumber, room.buildingName from room left join (select * from reservation where
-              '$reservedFrom' > reservedFrom AND 
-              '$reservedFrom' < reservedTo OR
-              '$reservedTo' > reservedFrom AND
-              '$reservedTo' < reservedTo) reservedRoom
+              STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') > reservedFrom AND 
+              STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') < reservedTo OR
+              STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') > reservedFrom AND
+              STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') < reservedTo) reservedRoom
                ON room.roomNumber = reservedRoom.roomNumber
                AND room.buildingName = reservedRoom.buildingName
                WHERE reservedFrom is NULL";
-        $test = 'SELECT * from room';
-       return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['reservedFrom' => $reservedFrom, 'reservedTo' => $reservedTo]);
+        $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $featureRepository = new FeatureRepositorySQL($this->conn);
+        foreach ($rooms as &$room) {
+            $buildingName = $room["buildingName"];
+            $roomNumber = $room["roomNumber"];
+            $room["features"] = $featureRepository->getResourceIconsForRoom($buildingName, $roomNumber);
+        }
+
+        return $rooms;
+
 
     }
 
     function removeReservation($roomNumber, $buildingName, $reservedFrom, $reservedTo)
     {
         $sql  = "DELETE from reservation WHERE '$roomNumber' = roomNumber AND '$buildingName' = buildingName
-                AND STR_TO_DATE('$reservedFrom', '%Y-%m-%d %H:%i:%s') = reservedFrom
-                AND STR_TO_DATE('$reservedTo', '%Y-%m-%d %H:%i:%s') = reservedTo";
+                AND STR_TO_DATE(:reservedFrom, '%Y-%m-%d %H:%i:%s') = reservedFrom
+                AND STR_TO_DATE(:reservedTo, '%Y-%m-%d %H:%i:%s') = reservedTo";
 
         return $this->conn->query($sql)->execute();
     }
