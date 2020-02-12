@@ -97,6 +97,15 @@ INSERT INTO room
 INSERT INTO room
     VALUES('ФМИ', '325', 'Семинарна зала', 100, 'Тинко Тинчев');
 
+INSERT INTO roomfeature
+    VALUES('ФМИ', 325, 'Проектор');
+
+INSERT INTO roomfeature
+VALUES('ФМИ', 325, 'Компютър');
+
+INSERT INTO roomfeature
+VALUES('ФХФ', '210', 'Проектор');
+
 INSERT INTO reservation
 	VALUES('ФМИ', '200', '2020-01-01 10:10:10','2020-01-01 11:10:10','Милен Петров','Уеб');
 
