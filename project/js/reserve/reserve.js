@@ -59,9 +59,13 @@ function removeReservation() {
             reservedFrom: reservedFrom,
             reservedTo: reservedTo,
         },
-        success: function (response) {
-            const reservationForm = $('#removal-form');
-            reservationForm.append('<p> Резервацията е премахната.</p>');
+        success: function () {
+            alert("Успешно премахната резервация!");
+        },
+        statusCode: {
+            409: function () {
+                alert('Грешка! Резервацията вече е премахната.');
+            }
         }
     });
 }
