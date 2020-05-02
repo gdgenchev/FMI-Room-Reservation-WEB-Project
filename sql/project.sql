@@ -45,7 +45,6 @@ roomNumber VARCHAR(10),
 message VARCHAR(100)
 );
 
------ Constraints -----
 ALTER TABLE building ADD CONSTRAINT pk_building PRIMARY KEY(buildingName);
 
 ALTER TABLE room ADD CONSTRAINT pk_room PRIMARY KEY(buildingName, roomNumber);
@@ -68,7 +67,6 @@ ALTER TABLE roomfeature ADD CONSTRAINT fk_roomfeature_room FOREIGN KEY(buildingN
 
 ALTER TABLE message ADD CONSTRAINT fk_message_room FOREIGN KEY(buildingName, roomNumber) REFERENCES room(buildingName, roomNumber);
 
------ Building Data ----
 INSERT INTO building 
 	VALUES('ФМИ', 42.674735, 23.330535);
     
@@ -81,7 +79,6 @@ INSERT INTO building
 INSERT INTO building 
 	VALUES('Ректорат', 42.674735, 23.334752);
   
----- Features Data ----
 INSERT INTO feature
 	VALUES('Проектор', '&#xf03d;');
     
