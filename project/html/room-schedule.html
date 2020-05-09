@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  
+  <title>Room Schedule</title>
+</head>
+<body>
+<h2>Room Schedule</h2>
+
+<div class="container">
+  <form action="../php/getRoomSchedule.php" id="myform" enctype="multipart/form-data" method="POST">
+    <div class="form-group">
+      <label>Room Number:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <b>№</b>
+          </span>
+        </div>
+        <input type="text" name="roomNumber" class="form-control border-left-0" placeholder="200-A">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Building:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-university"></i>
+          </span>
+        </div>
+        <select id="building-names" name="buildingName" class="form-control border-left-0">
+          <option selected disabled hidden>Choose Building</option>
+        </select>
+      </div>
+    </div>
+    
+    <input type="submit" id="search_button" value="Show Room Schedule">
+  </form>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../js/common/common.js"></script>
+<script src="../js/schedule/shcedule.js"></script>
+</body>
+</html>

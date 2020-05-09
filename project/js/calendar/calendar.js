@@ -1,4 +1,9 @@
-$( document ).ready(function() 
+$('.custom-file-input').on('change', function() {
+	let fileName = $(this).val().split('\\').pop();
+	$(this).next('.custom-file-label').addClass("selected").html(fileName);
+});
+
+$( document ).ready(function()
 	{
 
 	  $("#search_button").click(function()
@@ -11,7 +16,7 @@ $( document ).ready(function()
 				{
 			  		obj[i.toString()] = info[i];
 			  	}
-			    $("#mytable").load("php/getInfo.php", obj);
+			    $("#mytable").load("../php/getInfo.php", obj);
 			     return false;
 		  });
 	  });
@@ -23,13 +28,13 @@ $( document ).ready(function()
 		   var file = $("#imported_file")[0].files[0];
 		  	var extension = $("#imported_file").val().split('.').pop();
 		  	console.log(extension);
-		  	if( document.getElementById("imported_file").files[0].size >0 && extension.localeCompare("csv") == 0)
+		  	if( document.getElementById("imported_file").files[0].size >0 && extension.localeCompare("csv") === 0)
 		  	{
 		  		var formData = new FormData();
 		  		formData.append('file',file);
 		  		$.ajax({
 			  		type: "POST",
-			  		url: "php/import.php",
+			  		url: "../php/import.php",
 			  		contentType: false,
 			  		processData: false,
 			  		cache: false,
@@ -37,13 +42,13 @@ $( document ).ready(function()
 
 			  		success:function(response)
 			  		{
-			  			if(response == "success")
+			  			if(response === "success")
 			  			{
-			  				$("#message").html("File is successfully uploaded.");
+			  				alert("File is successfully uploaded!");
 			  			}
 			  			else 
 			  			{
-			  				$("#message").html("Something went wrong. Try again.");
+			  				alert(response);
 			  			}
 			  		}
 		  		});	  	 
@@ -58,7 +63,7 @@ $( document ).ready(function()
 
 	  		$.ajax({
 	  			type: "POST",
-			  	url: "php/export.php"
+			  	url: "../php/export.php"
 	  		});
 
 	  		return false;

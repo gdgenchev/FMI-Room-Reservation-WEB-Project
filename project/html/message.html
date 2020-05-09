@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  
+  <title>Add Message For Room</title>
+</head>
+<body>
+<h2>Add Message For Room</h2>
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="building-names">Building:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-university"></i>
+          </span>
+        </div>
+        <select id="building-names" class="form-control border-left-0">
+          <option class="select-placeholder" selected disabled hidden>Choose Building</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="room-number">Room Number:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0 starting-time">
+            <b>№</b>
+          </span>
+        </div>
+        <input type="text" id="room-number" class="form-control border-left-0" placeholder="205-A">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">Message:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0 starting-time">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+        <input type="text" id="message" class="form-control border-left-0"
+               placeholder="There is no electricity in the room!">
+      </div>
+    </div>
+    
+    <input type="button" value="Add Message" onclick="addMessage()">
+  </form>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../js/common/common.js"></script>
+<script src="../js/reserve/message.js"></script>
+</body>
+</html>

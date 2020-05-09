@@ -22,6 +22,7 @@ class MessageRepositorySQL implements MessageRepository
             $this->conn->prepare($sql)->execute([$buildingName,$roomNumber,$message]);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
+                echo $e->getMessage();
                 return false;
             } else {
                 throw $e;

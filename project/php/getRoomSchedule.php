@@ -25,8 +25,8 @@ if(count($result) > 0)
         echo "<tr style=\"border:1px solid black\">";
         echo "<td style=\"border:1px solid black\">" . $row["reservedFrom"] . "</td>";
         echo "<td style=\"border:1px solid black\">" . $row["reservedTo"] . "</td>";
-        echo "<td style=\"border:1px solid black\">" . $row["personWhoReserved"] . "</td>";
-        echo "<td style=\"border:1px solid black\">" . $row["subject"] . "</td>";
+        echo "<td style=\"border:1px solid black\">" . $row["reservedBy"] . "</td>";
+        echo "<td style=\"border:1px solid black\">" . $row["course"] . "</td>";
         echo "</tr>";
     }
     echo "</table>";

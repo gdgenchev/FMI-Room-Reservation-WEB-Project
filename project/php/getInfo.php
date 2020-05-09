@@ -4,7 +4,7 @@
 
 		$input = implode(" ", $_POST);
 
-		$sql = "select * from reservation where subject = \"$input\" or personWhoReserved = \"$input\" ";
+		$sql = "select * from reservation where course = \"$input\" or reservedBy = \"$input\" ";
 
 	 	$result = mysqli_query($conn,$sql);
 
@@ -17,7 +17,7 @@
 		   <th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">From</th>
 		   <th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">To</th>
 		   <th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">Person</th>
-		   <th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">Subject</th>
+		   <th style=\"border:1px solid black; background-color: #4CAF50; color: white;\">course</th>
 	      </tr>";
 
 
@@ -30,8 +30,8 @@
 	 		 echo "<td style=\"border:1px solid black\">" . $row["buildingName"] . "</td>";
 	 		 echo "<td style=\"border:1px solid black\">" . $row["reservedFrom"] . "</td>";
 	 		 echo "<td style=\"border:1px solid black\">" . $row["reservedTo"] . "</td>";
-	 		 echo "<td style=\"border:1px solid black\">" . $row["personWhoReserved"] . "</td>";
-	 		 echo "<td style=\"border:1px solid black\">" . $row["subject"] . "</td>";
+	 		 echo "<td style=\"border:1px solid black\">" . $row["reservedBy"] . "</td>";
+	 		 echo "<td style=\"border:1px solid black\">" . $row["course"] . "</td>";
 	 		 echo "</tr>";
 	 		}
 	 		echo "</table>";

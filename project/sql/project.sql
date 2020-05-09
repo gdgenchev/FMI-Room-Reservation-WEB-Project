@@ -29,8 +29,8 @@ buildingName VARCHAR(100),
 roomNumber VARCHAR(10),
 reservedFrom DATETIME,
 reservedTo DATETIME,
-personWhoReserved VARCHAR(50),
-subject VARCHAR(100)
+reservedBy VARCHAR(50),
+course VARCHAR(100)
 );
 
 CREATE TABLE roomfeature(
@@ -68,49 +68,25 @@ ALTER TABLE roomfeature ADD CONSTRAINT fk_roomfeature_room FOREIGN KEY(buildingN
 ALTER TABLE message ADD CONSTRAINT fk_message_room FOREIGN KEY(buildingName, roomNumber) REFERENCES room(buildingName, roomNumber);
 
 INSERT INTO building 
-	VALUES('ФМИ', 42.674735, 23.330535);
+	VALUES('FMI', 42.674735, 23.330535);
     
 INSERT INTO building 
-	VALUES('ФХФ', 42.674929, 23.332668);    
+	VALUES('FCP', 42.674929, 23.332668);
 
 INSERT INTO building 
-	VALUES('ФЗФ', 42.674038, 23.329663);
+	VALUES('FP', 42.674038, 23.329663);
     
 INSERT INTO building 
-	VALUES('Ректорат', 42.674735, 23.334752);
+	VALUES('Rectorate', 42.674735, 23.334752);
   
 INSERT INTO feature
-	VALUES('Проектор', '&#xf03d;');
+	VALUES('Projector', '&#xf03d;');
     
 INSERT INTO feature 
-	VALUES('Компютър', '&#xf108;');
+	VALUES('Computer', '&#xf108;');
 
-INSERT INTO room
-    VALUES('ФМИ', '200', 'Семинарна зала', 150, 'Трифон Трифонов');
+INSERT INTO feature
+    VALUES('Plug', '&#xf1e6;');
 
-INSERT INTO room
-    VALUES('ФХФ', '210', 'Семинарна зала', 200, 'Милен Петров');
-
-INSERT INTO room
-    VALUES('ФМИ', '325', 'Семинарна зала', 100, 'Тинко Тинчев');
-
-INSERT INTO roomfeature
-    VALUES('ФМИ', 325, 'Проектор');
-
-INSERT INTO roomfeature
-VALUES('ФМИ', 325, 'Компютър');
-
-INSERT INTO roomfeature
-VALUES('ФХФ', '210', 'Проектор');
-
-INSERT INTO reservation
-	VALUES('ФМИ', '200', '2020-01-01 10:10:10','2020-01-01 11:10:10','Милен Петров','Уеб');
-
-INSERT INTO reservation
-	VALUES('ФМИ', '325', '2020-01-01 10:10:10','2020-01-01 11:10:10','Тинко Тинчев','ЛП');
-
-INSERT INTO message
-    VALUES('ФМИ', '200', 'Залата е в ремонт');
-
-INSERT INTO message
-    VALUES('ФМИ', '325', 'В залата няма ток');
+INSERT INTO feature
+    VALUES('Printer', '&#xf02f;');

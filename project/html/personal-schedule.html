@@ -1,0 +1,62 @@
+<?php 
+	include 'dbConnection.php';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  
+  <title>Teacher/Course Schedule</title>
+</head>
+<body>
+<h1>Teacher/Course Schedule</h1>
+
+<div class="container">
+  <form id="myform" enctype="multipart/form-data" method="POST">
+    <!--TODO: Create separate logic for Teacher and Course search -->
+    <div class="form-group">
+      <label for="info">Teacher/Course:</label>
+      <div class="input-group">
+        <input type="text" id="info" class="form-control">
+      </div>
+    </div>
+    
+    <input type="submit" id="search_button" value="Show Schedule">
+    
+    <div class="form-group">
+      <label>Import Schedule:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-upload"></i>
+          </span>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="imported_file">
+          <label class="custom-file-label" for="imported_file">Choose file</label>
+        </div>
+      </div>
+    </div>
+    
+    <input type="submit" id="import_button" value="Import">
+    
+    <div class="form-group">
+      <label>Export Schedule:</label>
+      <input type="submit" id="export_button" value="Свали">
+    </div>
+  </form>
+</div>
+
+<div id="mytable">
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../js/calendar/calendar.js"></script>
+</body>
+</html>

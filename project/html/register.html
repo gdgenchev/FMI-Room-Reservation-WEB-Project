@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  
+  <title>Room Registration</title>
+</head>
+<body>
+<h2>Room Registration</h2>
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="building-names">Building:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-university"></i>
+          </span>
+        </div>
+        <select id="building-names" class="form-control border-left-0">
+          <option class="select-placeholder" selected disabled hidden>Choose Building</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="room-number">Room Number:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <b>№</b>
+          </span>
+        </div>
+        <input type="text" id="room-number" class="form-control border-left-0" placeholder="205-A">
+      </div>
+    </div>
+    
+    <!-- TODO: Get the room types from the db/hardcode them in the html and display them as a selection-->
+    <div class="form-group">
+      <label for="type">Room Type:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-door-open"></i>
+          </span>
+        </div>
+        <input type="text" id="type" class="form-control border-left-0" placeholder="Auditory">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="seats">Seats:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-chair"></i>
+          </span>
+        </div>
+        <input type="number" id="seats" class="form-control border-left-0" placeholder="50">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="features">Features:</label>
+      <div class="input-group">
+        <select id="features" class="form-control" multiple></select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="responsible-person">Responsible Person:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-user-tie"></i>
+          </span>
+        </div>
+        <input type="text" id="responsible-person" class="form-control border-left-0" placeholder="Jack Daniels">
+      </div>
+    </div>
+    
+    <input type="button" value="Add Room" onclick="registerRoom()">
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/89c21228df.js" crossorigin="anonymous" SameSite="none Secure"></script>
+<script src="../js/common/common.js"></script>
+<script src="../js/register/register.js"></script>
+</body>
+</html>

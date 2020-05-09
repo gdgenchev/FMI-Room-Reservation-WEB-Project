@@ -5,20 +5,6 @@
     padding: 20px;
 }
 
-input[type=text], input[type=number], select {
-    width: 100%;
-    padding: 5px;
-    margin: 8px 0;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-select {
-    padding-left: 1px;
-}
-
 input[type=button], input[type=submit] {
     width: 100%;
     background-color: #4CAF50;
@@ -29,7 +15,6 @@ input[type=button], input[type=submit] {
     border-radius: 5px;
     cursor: pointer;
 }
-
 
 input[type=button]:hover {
     background-color: #408000;
@@ -51,12 +36,17 @@ input[type=button]:hover {
     font-size: 16px;
 }
 
+#available-rooms {
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 16px;
+}
+
 #available-rooms option {
     font-family: 'FontAwesome', sans-serif;
     font-size: 16px;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
 }
 
@@ -84,4 +74,12 @@ h1 {
 
 .menu a:hover {
     background-color: #408000;
+}
+
+i[class*=fa-calendar-alt]::before{
+    background:transparent;
+}
+
+.input-group-prepend{
+    width:40px!important;
 }
