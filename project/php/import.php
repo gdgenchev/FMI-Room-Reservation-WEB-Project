@@ -1,6 +1,10 @@
 <?php
+require_once "persistence/room/RoomRepository.php";
+require_once "persistence/room/RoomRepositorySQL.php";
+
 require_once "persistence/reservation/ReservationRepository.php";
 require_once "persistence/reservation/ReservationRepositorySQL.php";
+
 require_once "util/DbConnectionCreator.php";
 
 
@@ -12,20 +16,32 @@ $importedFile = fopen($_FILES["file"]["tmp_name"], "r");
 fgetcsv($importedFile);
 
 $conn = DbConnectionCreator::createConnection();
+//Disable autocommit and execute a transaction for performance improvements in case of huge imports
+$conn->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
+$conn->beginTransaction();
+
+$roomRepository = new RoomRepositorySQL($conn);
 $reservationRepository = new ReservationRepositorySQL($conn);
 
-//Disable autocommit and execute a transaction for performance improvements in case of huge imports
-$conn->setAttribute(PDO::ATTR_AUTOCOMMIT,0);
-$conn->beginTransaction();
 while (($line = fgetcsv($importedFile, 1000, ";")) !== FALSE) {
     $roomNumber = $line[0];
     $buildingName = $line[1];
+
+    $room = (object)[
+        'roomNumber' => $roomNumber,
+        'buildingName' => $buildingName
+    ];
+
+    try {
+        $roomRepository->addRoom($room);
+    } catch (PDOException $e) {
+        echo 'Failed to add room ' . $roomNumber . ' in building ' . $buildingName;
+    }
+
     $reservedFrom = $line[2];
     $reservedTo = $line[3];
     $reservedBy = $line[4];
     $course = $line[5];
-
-    echo implode(" ", $line);
 
     $reservation = (object)[
         'roomNumber' => $roomNumber,
@@ -39,12 +55,10 @@ while (($line = fgetcsv($importedFile, 1000, ";")) !== FALSE) {
     try {
         $result = $reservationRepository->addReservation($reservation);
         if (!$result) {
-            echo 'Failed to import ' + implode(" ", $line);
-            echo 'Reservation already exists!';
+            echo 'Reservation already exists for ' . implode(" ", $line);
         }
     } catch (PDOException $e) {
-            echo 'Failed to import ' + implode(" ", $line);
-            echo $e->getMessage();
+        echo 'Failed to import ' . implode(" ", $line) . '. Reason: ' . $e->getMessage();
     }
 }
 
