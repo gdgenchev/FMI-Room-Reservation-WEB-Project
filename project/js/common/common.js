@@ -34,6 +34,8 @@ function fillFeaturesSelect() {
             option.setAttribute("value", features[i]["featureName"]);
             featuresSelect.options[featuresSelect.options.length] = option;
         }
+
+        featuresSelect.selectpicker('refresh');
     }
 
     if (sessionStorage.getItem('features') === null) {
