@@ -26,26 +26,6 @@ input[type=button]:hover {
     }
 }
 
-#features {
-    white-space: normal;
-    overflow-y: auto;
-}
-
-#features option {
-    font-family: 'FontAwesome', sans-serif;
-    font-size: 16px;
-}
-
-#available-rooms {
-    font-family: 'FontAwesome', sans-serif;
-    font-size: 16px;
-}
-
-#available-rooms option {
-    font-family: 'FontAwesome', sans-serif;
-    font-size: 16px;
-}
-
 h1, h2 {
     text-align: center;
 }
@@ -82,4 +62,13 @@ i[class*=fa-calendar-alt]::before{
 
 .input-group-prepend{
     width:40px!important;
+}
+
+.bs-placeholder, .bootstrap-select .btn {
+    border-color: #cfd4da;
+    background-color: white;
+}
+
+.font-awesome-in-select {
+    font-family: 'FontAwesome', sans-serif;
 }

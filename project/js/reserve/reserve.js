@@ -2,8 +2,8 @@ const ROOT_DIR = "FMI-Room-Reservation-WEB-Project/project";
 
 function getAvailableRooms() {
     const date = $('#date').val();
-    const startingTime =  $('#starting-time').val();
-    const endingTime =  $('#ending-time').val();
+    const startingTime = $('#starting-time').val();
+    const endingTime = $('#ending-time').val();
 
 
     const reservedFrom = date + " " + startingTime;
@@ -24,8 +24,7 @@ function getAvailableRooms() {
                 '<div class="form-group dynamic">' +
                 '  <label>Available Rooms:</label>' +
                 '  <div class="input-group">' +
-                '    <select id="available-rooms"  class="form-control">' +
-                '      <option selected disabled hidden>Choose Room</option>' +
+                '    <select id="available-rooms" class="form-control selectpicker font-awesome-in-select" data-style="btn-white" title="Choose room">' +
                 '  </div>' +
                 '</div>');
 
@@ -40,6 +39,9 @@ function getAvailableRooms() {
                 option.setAttribute("value", availableRooms[i]['buildingName'] + "," + availableRooms[i]["roomNumber"]);
                 availableRoomsSelect.append(option);
             }
+
+            availableRoomsSelect.selectpicker('refresh');
+
             if (availableRooms.length === 0) {
                 $('.dynamic').remove();
                 alert("Няма свободни стаи за избраното време.");
@@ -80,8 +82,8 @@ function getAvailableRooms() {
 
 function reserveRoom() {
     const date = $('#date').val();
-    const startingTime =  $('#starting-time').val();
-    const endingTime =  $('#ending-time').val();
+    const startingTime = $('#starting-time').val();
+    const endingTime = $('#ending-time').val();
 
 
     const reservedFrom = date + " " + startingTime;
@@ -90,7 +92,7 @@ function reserveRoom() {
     const availableRoomsSelect = document.getElementById('available-rooms');
     const availableRoom = availableRoomsSelect.options[availableRoomsSelect.selectedIndex].value;
     const reservedBy = $('#reservedBy').val();
-    const course =$('#course').val();
+    const course = $('#course').val();
     const array = availableRoom.split(",");
     const buildingName = array[0];
     const roomNumber = array[1];
@@ -119,19 +121,6 @@ function reserveRoom() {
         }
     });
 }
-
-$("#features-select").mousedown(function (e) {
-    e.preventDefault();
-
-    var select = this;
-    var scroll = select.scrollTop;
-
-    e.target.selected = !e.target.selected;
-
-    setTimeout(() => select.scrollTop = scroll, 0);
-    $(select).focus();
-}).mousemove(e => e.preventDefault());
-
 
 $('#date').datepicker({
     orientation: 'bottom left',
