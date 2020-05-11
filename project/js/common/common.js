@@ -35,7 +35,7 @@ function fillFeaturesSelect() {
             featuresSelect.options[featuresSelect.options.length] = option;
         }
 
-        featuresSelect.selectpicker('refresh');
+       $('#features').selectpicker('refresh');
     }
 
     if (sessionStorage.getItem('features') === null) {
