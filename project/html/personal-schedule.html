@@ -18,7 +18,7 @@
 <h1>Teacher/Course Schedule</h1>
 
 <div class="container">
-  <form id="myform" enctype="multipart/form-data" method="POST">
+  <form id="search-form" method="POST">
     <!--TODO: Create separate logic for Teacher and Course search -->
     <div class="form-group">
       <label for="info">Teacher/Course:</label>
@@ -26,37 +26,13 @@
         <input type="text" id="info" class="form-control">
       </div>
     </div>
-    
-    <input type="submit" id="search_button" value="Show Schedule">
-    
-    <div class="form-group">
-      <label>Import Schedule:</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text bg-white border-right-0">
-            <i class="fas fa-upload"></i>
-          </span>
-        </div>
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="imported_file">
-          <label class="custom-file-label" for="imported_file">Choose file</label>
-        </div>
-      </div>
-    </div>
-    
-    <input type="submit" id="import_button" value="Import">
-    
-    <div class="form-group">
-      <label>Export Schedule:</label>
-      <input type="submit" id="export_button" value="Свали">
-    </div>
+    <input type="submit" value="Show Schedule" onclick="displaySchedule()">
   </form>
 </div>
 
-<div id="mytable">
-</div>
+<div id="schedule-table"></div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="../js/calendar/calendar.js"></script>
+<script src="../js/personal-schedule/display-schedule.js"></script>
 </body>
 </html>
