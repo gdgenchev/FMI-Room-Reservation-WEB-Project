@@ -27,5 +27,5 @@
 
     readFile($filename);
 
-    unlink($importedFile);
+    unlink($filename);
 ?>
