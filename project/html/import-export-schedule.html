@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  
+  <title>Import/Export Schedule</title>
+</head>
+<body>
+<h1>Import/Export Schedule</h1>
+
+<div class="container">
+  <form id="import-form" method="POST">
+    <div class="form-group">
+      <label>Import Schedule:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-white border-right-0">
+            <i class="fas fa-upload"></i>
+          </span>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="imported_file">
+          <label class="custom-file-label" for="imported_file">Choose file</label>
+        </div>
+      </div>
+    </div>
+    <input type="submit" value="Import" onclick="importSchedule()">
+  </form>
+  
+  <!--TODO: This was the only way I managed to trigger download at client side
+       We should check if there is a way to do the same from javascript -->
+  <form id="export-form" method="POST" action="../php/export.php">
+    <div class="form-group">
+      <label>Export Schedule:</label>
+      <input type="submit" id="export_button" value="Download CSV">
+    </div>
+  </form>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../js/personal-schedule/import-schedule.js"></script>
+</body>
+</html>
