@@ -1,14 +1,10 @@
 <?php
 	include 'dbConnection.php';
 
-	header('Content-Encoding: UTF-8');
-	header('Content-Disposition: attachment');
-	header('Content-type: text/csv; charset=UTF-8');
-	header('Pragma: no-cache');
-	header('Expires: 0');
-
+    $filename = "exported-schedule.csv" . rand();
 	$delimiter = ",";
-	$output = fopen("../downloadedContent.csv","w");
+
+	$output = fopen($filename,"w");
 
 	fputs($output, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
 
@@ -27,4 +23,9 @@
 
 	fclose($output);
 
+    header('Content-disposition: attachment; filename='. 'exported-schedule.csv');
+
+    readFile($filename);
+
+    unlink($importedFile);
 ?>
