@@ -26,18 +26,6 @@ $reservationRepository = new ReservationRepositorySQL($conn);
 while (($line = fgetcsv($importedFile, 1000, ";")) !== FALSE) {
     $roomNumber = $line[0];
     $buildingName = $line[1];
-
-    $room = (object)[
-        'roomNumber' => $roomNumber,
-        'buildingName' => $buildingName
-    ];
-
-    try {
-        $roomRepository->addRoom($room);
-    } catch (PDOException $e) {
-        echo 'Failed to add room ' . $roomNumber . ' in building ' . $buildingName;
-    }
-
     $reservedFrom = $line[2];
     $reservedTo = $line[3];
     $reservedBy = $line[4];
@@ -65,4 +53,5 @@ while (($line = fgetcsv($importedFile, 1000, ";")) !== FALSE) {
 $conn->commit();
 
 fclose($importedFile);
+
 echo "success";
